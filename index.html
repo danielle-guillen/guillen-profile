@@ -32,23 +32,58 @@
 
             <!-- Toolbar -->
             <div class="toolbar">
-                <button class="toolbar-btn" title="Atrás">◀</button>
-                <button class="toolbar-btn" title="Adelante">▶</button>
-                <button class="toolbar-btn" title="Detener">⊠</button>
-                <button class="toolbar-btn active" title="Actualizar">⟳</button>
-                <input type="text" class="address-bar" value="http://localhost/nrinconweb/index.html" readonly>
+                <div class="toolbar-grip" aria-hidden="true"></div>
+                <button class="toolbar-btn" title="Atrás">
+                    <img src="assets/icon-back.ico" alt="" width="16" height="16" class="toolbar-icon">
+                    <span>Atrás</span>
+                </button>
+                <button class="toolbar-btn" title="Adelante">
+                    <img src="assets/icon-forward.ico" alt="" width="16" height="16" class="toolbar-icon">
+                    <span>Adelante</span>
+                </button>
+                <div class="toolbar-separator" aria-hidden="true"></div>
+                <button class="toolbar-btn" title="Detener">
+                    <img src="assets/icon-stop.ico" alt="" width="16" height="16" class="toolbar-icon">
+                    <span>Detener</span>
+                </button>
+                <button class="toolbar-btn active" title="Actualizar">
+                    <img src="assets/icon-refresh.ico" alt="" width="16" height="16" class="toolbar-icon">
+                    <span>Actualizar</span>
+                </button>
+                <div class="toolbar-separator" aria-hidden="true"></div>
+                <div class="address-group">
+                    <span class="address-label">Dirección</span>
+                    <input type="text" class="address-bar" value="https://www.youtube.com/watch?v=dQw4w9WgXcQ" readonly>
+                </div>
             </div>
 
             <div class="classic-toolbar">
-                <button class="classic-btn" type="button">Inicio</button>
-                <button class="classic-btn" type="button">Favoritos</button>
-                <button class="classic-btn" type="button">Descargas</button>
-                <button class="classic-btn" type="button">Guestbook</button>
-                <button class="classic-btn" type="button">Links</button>
+                <div class="toolbar-grip" aria-hidden="true"></div>
+                <button class="classic-btn" type="button">
+                    <img src="assets/icon-home.ico" alt="" width="16" height="16" class="toolbar-icon">
+                    <span>Inicio</span>
+                </button>
+                <div class="toolbar-separator" aria-hidden="true"></div>
+                <button class="classic-btn" type="button">
+                    <img src="assets/icon-favorites.ico" alt="" width="16" height="16" class="toolbar-icon">
+                    <span>Favoritos</span>
+                </button>
+                <button class="classic-btn" type="button">
+                    <img src="assets/icon-download.ico" alt="" width="16" height="16" class="toolbar-icon">
+                    <span>Descargas</span>
+                </button>
+                <button class="classic-btn" type="button">
+                    <img src="assets/icon-guestbook.ico" alt="" width="16" height="16" class="toolbar-icon">
+                    <span>Guestbook</span>
+                </button>
+                <button class="classic-btn" type="button">
+                    <img src="assets/icon-links.ico" alt="" width="16" height="16" class="toolbar-icon">
+                    <span>Links</span>
+                </button>
             </div>
 
             <marquee class="retro-marquee" behavior="scroll" direction="left" scrollamount="5">
-                ⚡ ¡ACTUALIZACIÓN 14/03/2026! ⚡ Bienvenidos a mi nueva página. ¡No olvides firmar mi libro de visitas al fondo a la derecha! 🚧 Página en constante construcción 🚧
+                ⚡ ¡ACTUALIZACIÓN! ⚡ Bienvenidos a mi nueva página. ¡No olvides firmar mi libro de visitas al fondo a la derecha! 🚧 Página en constante construcción 🚧
             </marquee>
 
         <!-- PCB Background Content -->
@@ -114,13 +149,37 @@
                         <div class="social-panel">
                             <div class="panel-header">MIS REDES</div>
                             <div class="panel-content social-content">
-                                <div class="hand-pointer">👉</div>
                                 <ul class="social-links">
-                                    <li><a href="#aim">AIM: NsCorner</a></li>
-                                    <li><a href="#myspace">MySpace: /NsCorner</a></li>
-                                    <li><a href="#x">X: @NsCorner</a></li>
-                                    <li><a href="https://www.instagram.com/im_daaaniel?igsh=YjVhOG44aGdmczIz">Instagram: @im_daaaniel</a></li>
-                                    <li><a href="#facebook">Facebook: N</a></li>
+                                    <li>
+                                        <a href="https://github.com/danielle-guillen">
+                                            <img src="assets/personal-github.gif" alt="" width="16" height="16" class="social-icon">
+                                            [Personal] Github
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://github.com/DanielCGR">
+                                            <img src="assets/academic-github.gif" alt="" width="16" height="16" class="social-icon">
+                                            [Académico] Github
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://pe.linkedin.com/in/daniel-guillen-rojas">
+                                            <img src="assets/linkedin2.gif" alt="" width="16" height="16" class="social-icon">
+                                            LinkedIn
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.instagram.com/im_daaaniel?igsh=YjVhOG44aGdmczIz">
+                                            <img src="assets/social.gif" alt="" width="16" height="16" class="social-icon">
+                                            Instagram: @im_daaaniel
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://discordapp.com/users/627349451157143552">
+                                            <img src="assets/discord.gif" alt="" width="16" height="16" class="social-icon">
+                                            Discord
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -172,9 +231,11 @@
                             <div class="panel-content mp3-content">
                                 <div class="mp3-lcd" id="mp3Lcd">TRACK 01 | 00:00 | STOP</div>
                                 <div class="mp3-controls">
+                                    <button class="mp3-btn" id="mp3Prev" type="button">|◀</button>
                                     <button class="mp3-btn" id="mp3Play" type="button">PLAY</button>
                                     <button class="mp3-btn" id="mp3Pause" type="button">PAUSE</button>
                                     <button class="mp3-btn" id="mp3Stop" type="button">STOP</button>
+                                    <button class="mp3-btn" id="mp3Next" type="button">▶|</button>
                                 </div>
                                 <audio id="retroAudio" preload="none"></audio>
                             </div>
@@ -230,7 +291,14 @@
 
                 <!-- Footer -->
                 <div class="footer-section">
-                    <p>EN MANTENIMIENTO</p>
+                    <div class="badge-strip">
+                        <img src="assets/gtavi.gif"  alt="Valid HTML 4.0"        title="Valid HTML 4.0"        class="retro-badge">
+                        <img src="assets/qa-members.gif"    alt="Optimizado para IE5"   title="Optimizado para IE5"   class="retro-badge">
+                        <img src="assets/cat-space.gif"   alt="Audio FLAC Soportado"  title="Audio FLAC Soportado"  class="retro-badge">
+                        <img src="assets/dog-quality-assurance.gif"     alt="QA Tested"             title="QA Tested"             class="retro-badge">
+                        <img src="assets/linux.gif" alt="Powered by Ubuntu"     title="Powered by Ubuntu"     class="retro-badge">
+                    </div>
+                    <p class="footer-disclaimer">© 2026 Danielle's Rincón Web. Optimizado para resolución de 800×600 px en color de 16 bits.</p>
                 </div>
             </div>
         </div>

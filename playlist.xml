@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist>
+    <track>
+        <id>01</id>
+        <title>David Bisbal - Dígale</title>
+        <duration>263</duration>
+    </track>
+    <track>
+        <id>02</id>
+        <title>Rata Blanca - Mujer Amante</title>
+        <duration>364</duration>
+    </track>
+    <track>
+        <id>03</id>
+        <title>Laura Pausini - Volveré Junto a ti</title>
+        <duration>242</duration>
+    </track>
+    <track>
+        <id>04</id>
+        <title>Vico C - Me Acuerdo</title>
+        <duration>355</duration>
+    </track>
+    <track>
+        <id>05</id>
+        <title>Bad Bunny X Mora - Una Vez</title>
+        <duration>233</duration>
+    </track>
+</playlist>

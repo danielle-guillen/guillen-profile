@@ -20,15 +20,18 @@ function initializeRetroMp3Player() {
     const playBtn = document.getElementById('mp3Play');
     const pauseBtn = document.getElementById('mp3Pause');
     const stopBtn = document.getElementById('mp3Stop');
-    const audio = document.getElementById('retroAudio');
+    const nextBtn = document.getElementById('mp3Next');
+    const prevBtn = document.getElementById('mp3Prev');
 
     if (!lcd || !playBtn || !pauseBtn || !stopBtn) {
         return;
     }
 
-    let elapsed = 0;
+    let playlist = [];
+    let currentIndex = 0;
+    let playbackState = 'STOP';
+    let elapsedSeconds = 0;
     let timerId = null;
-    let state = 'STOP';
 
     const formatTime = (totalSeconds) => {
         const mins = Math.floor(totalSeconds / 60);
@@ -36,57 +39,155 @@ function initializeRetroMp3Player() {
         return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
     };
 
-    const refreshLcd = () => {
-        lcd.textContent = 'TRACK 01 | ' + formatTime(elapsed) + ' | ' + state;
+    const updateLCD = () => {
+        const currentTrack = playlist[currentIndex] || { id: '00', title: 'Sin pistas', duration: 0 };
+        lcd.textContent = currentTrack.id + '. ' + currentTrack.title + ' | ' + formatTime(elapsedSeconds) + ' | ' + playbackState;
     };
 
-    const startFakePlayback = () => {
-        if (timerId) return;
+    const clearFakeTimer = () => {
+        if (!timerId) {
+            return;
+        }
+
+        clearInterval(timerId);
+        timerId = null;
+    };
+
+    const startFakeTimer = () => {
+        if (timerId) {
+            return;
+        }
+
         timerId = setInterval(() => {
-            elapsed += 1;
-            refreshLcd();
+            elapsedSeconds += 1;
+
+            const currentTrack = playlist[currentIndex];
+            const trackDuration = Number.isInteger(currentTrack?.duration) && currentTrack.duration > 0
+                ? currentTrack.duration
+                : 180;
+
+            if (elapsedSeconds >= trackDuration && playlist.length > 0) {
+                currentIndex = (currentIndex + 1) % playlist.length;
+                elapsedSeconds = 0;
+            }
+
+            updateLCD();
         }, 1000);
     };
 
-    const stopFakePlayback = () => {
-        if (timerId) {
-            clearInterval(timerId);
-            timerId = null;
+    const changeTrack = (step) => {
+        if (!playlist.length) {
+            return;
         }
+
+        const total = playlist.length;
+        currentIndex = (currentIndex + step + total) % total;
+        elapsedSeconds = 0;
+
+        if (playbackState === 'PLAY') {
+            startFakeTimer();
+        } else {
+            clearFakeTimer();
+        }
+
+        updateLCD();
+    };
+
+    const loadPlaylist = async () => {
+        const fallbackPlaylist = [
+            { id: '01', title: 'Final Fantasy VII - Battle Theme', duration: 185 },
+            { id: '02', title: 'Linkin Park - In The End (8-bit)', duration: 216 }
+        ];
+
+        try {
+            const xmlPaths = ['playlist.xml', './playlist.xml', '/playlist.xml'];
+            let xmlText = null;
+
+            for (const path of xmlPaths) {
+                try {
+                    const response = await fetch(path, { cache: 'no-store' });
+                    if (!response.ok) {
+                        continue;
+                    }
+
+                    xmlText = await response.text();
+                    if (xmlText && xmlText.trim()) {
+                        break;
+                    }
+                } catch (pathError) {
+                    // Try next candidate path.
+                }
+            }
+
+            if (!xmlText) {
+                throw new Error('No se pudo cargar playlist.xml');
+            }
+
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, 'application/xml');
+
+            const parserError = xmlDoc.querySelector('parsererror');
+            if (parserError) {
+                throw new Error('XML inválido en playlist.xml');
+            }
+
+            const trackNodes = Array.from(xmlDoc.querySelectorAll('track'));
+            playlist = trackNodes.map((trackNode, index) => {
+                const id = (trackNode.querySelector('id')?.textContent || String(index + 1)).trim().padStart(2, '0');
+                const title = (trackNode.querySelector('title')?.textContent || 'Sin título').trim();
+                const durationText = (trackNode.querySelector('duration')?.textContent || '').trim();
+                const parsedDuration = Number.parseInt(durationText, 10);
+                const duration = Number.isInteger(parsedDuration) && parsedDuration > 0 ? parsedDuration : 180;
+
+                return { id, title, duration };
+            });
+
+            if (!playlist.length) {
+                playlist = [{ id: '00', title: 'Sin pistas en playlist.xml', duration: 180 }];
+            }
+        } catch (error) {
+            playlist = fallbackPlaylist;
+            console.warn('No se pudo cargar playlist.xml con fetch. Usando playlist de respaldo.', error);
+        }
+
+        currentIndex = 0;
+        elapsedSeconds = 0;
+        updateLCD();
     };
 
     playBtn.addEventListener('click', () => {
-        state = 'PLAY';
-        startFakePlayback();
-        if (audio) {
-            audio.play().catch(() => {
-                // Keep retro simulation running even without a valid audio source.
-            });
-        }
-        refreshLcd();
+        playbackState = 'PLAY';
+        startFakeTimer();
+        updateLCD();
     });
 
     pauseBtn.addEventListener('click', () => {
-        state = 'PAUSE';
-        stopFakePlayback();
-        if (audio) {
-            audio.pause();
-        }
-        refreshLcd();
+        playbackState = 'PAUSE';
+        clearFakeTimer();
+        updateLCD();
     });
 
     stopBtn.addEventListener('click', () => {
-        state = 'STOP';
-        stopFakePlayback();
-        elapsed = 0;
-        if (audio) {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-        refreshLcd();
+        playbackState = 'STOP';
+        clearFakeTimer();
+        elapsedSeconds = 0;
+        updateLCD();
     });
 
-    refreshLcd();
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            changeTrack(1);
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            changeTrack(-1);
+        });
+    }
+
+    updateLCD();
+    loadPlaylist();
 }
 
 /**
@@ -294,12 +395,8 @@ function initializeSocialLinks() {
     const socialLinks = document.querySelectorAll('.social-links li a');
     
     socialLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const handle = this.textContent;
-            console.log('Navegando a: ' + handle);
-            showRetroAlert('Navegaría a:\n\n' + handle);
-        });
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
     });
 }
 

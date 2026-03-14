@@ -130,14 +130,15 @@ body::before {
 
 /* Toolbar */
 .toolbar {
-    height: 28px;
+    height: auto;
+    min-height: 52px;
     background: #c0c0c0;
     border-bottom: 2px solid;
     border-color: #dfdfdf #0a0a0a;
     display: flex;
-    gap: 4px;
+    gap: 2px;
     align-items: center;
-    padding: 4px;
+    padding: 3px 4px 3px 2px;
     flex-shrink: 0;
 }
 
@@ -149,26 +150,38 @@ body::before {
     border-color: #dfdfdf #0a0a0a;
     display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 3px 4px;
+    gap: 2px;
+    padding: 2px 4px 2px 2px;
     flex-shrink: 0;
 }
 
 .classic-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
     height: 20px;
-    min-width: 72px;
-    background: #c0c0c0;
-    border: 2px solid;
-    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    min-width: 60px;
+    background: transparent;
+    border: 1px solid transparent;
     font-size: 10px;
     font-weight: bold;
     font-family: 'MS Sans Serif', Arial, sans-serif;
     cursor: pointer;
-    padding: 0 8px;
+    padding: 0 5px;
+    color: #000;
+}
+
+.classic-btn:hover {
+    background: #c0c0c0;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #0a0a0a;
 }
 
 .classic-btn:active {
+    background: #b0b0b0;
     border-color: #808080 #dfdfdf #dfdfdf #808080;
+    box-shadow: inset 1px 1px 0 #0a0a0a, inset -1px -1px 0 #ffffff;
 }
 
 .retro-marquee {
@@ -186,23 +199,45 @@ body::before {
 }
 
 .toolbar-btn {
-    width: 24px;
-    height: 22px;
-    background: #c0c0c0;
-    border: 2px solid;
-    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 46px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid transparent;
     cursor: pointer;
-    font-size: 12px;
-    padding: 0;
+    padding: 2px 4px;
+    color: #000;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+}
+
+.toolbar-btn:hover {
+    background: #c0c0c0;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #0a0a0a;
 }
 
 .toolbar-btn:active {
+    background: #b0b0b0;
     border-color: #808080 #dfdfdf #dfdfdf #808080;
+    box-shadow: inset 1px 1px 0 #0a0a0a, inset -1px -1px 0 #ffffff;
 }
 
 .toolbar-btn.active {
-    border-color: #808080 #dfdfdf #dfdfdf #808080;
     background: #b0b0b0;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    box-shadow: inset 1px 1px 0 #0a0a0a, inset -1px -1px 0 #ffffff;
+}
+
+.toolbar-btn span {
+    font-size: 9px;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    white-space: nowrap;
+    color: inherit;
+    line-height: 1;
 }
 
 .address-bar {
@@ -214,6 +249,66 @@ body::before {
     padding: 2px 4px;
     font-size: 11px;
     font-family: 'Courier New', monospace;
+}
+
+/* ============================================
+   TOOLBAR ACCESSORIES
+   ============================================ */
+.toolbar-grip {
+    width: 8px;
+    align-self: stretch;
+    flex-shrink: 0;
+    margin: 2px 4px 2px 2px;
+    position: relative;
+}
+
+.toolbar-grip::before,
+.toolbar-grip::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    width: 0;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #808080;
+}
+
+.toolbar-grip::before { left: 0; }
+.toolbar-grip::after  { left: 4px; }
+
+.toolbar-separator {
+    width: 0;
+    align-self: stretch;
+    margin: 4px 3px;
+    border-left: 1px solid #808080;
+    border-right: 1px solid #ffffff;
+    flex-shrink: 0;
+}
+
+.address-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.address-label {
+    font-size: 11px;
+    font-family: 'MS Sans Serif', Arial, sans-serif;
+    color: #000;
+    white-space: nowrap;
+    font-weight: normal;
+    flex-shrink: 0;
+}
+
+.toolbar-icon {
+    width: 16px;
+    height: 16px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    display: block;
+    flex-shrink: 0;
 }
 
 /* ============================================
@@ -414,15 +509,13 @@ body::before {
 .social-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 8px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 3px 2px;
 }
 
 .hand-pointer {
-    font-size: 24px;
-    margin-bottom: 8px;
-    animation: pointingHand 0.8s ease-in-out infinite;
+    display: none;
 }
 
 @keyframes pointingHand {
@@ -435,25 +528,41 @@ body::before {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0;
 }
 
 .social-links li a {
     text-decoration: none;
     color: #000080;
     font-size: 10px;
-    padding: 3px 4px;
-    display: block;
-    border: 1px solid transparent;
+    padding: 2px 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px dotted transparent;
     cursor: pointer;
-    transition: all 0.2s;
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .social-links li a:hover {
-    background: linear-gradient(90deg, #000080, #1084d7);
+    background: #000080;
     color: #ffffff;
-    border: 1px solid #ffffff;
+    outline: 1px dotted #ffffff;
+    outline-offset: -1px;
+    border-color: transparent;
+}
+
+.social-icon {
+    width: 16px;
+    height: 16px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* ============================================
@@ -849,7 +958,9 @@ body::before {
     box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
     margin-top: auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
 }
 
 .badge-strip {
@@ -865,6 +976,17 @@ body::before {
     height: 31px;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+    border: 1px solid #808080;
+    display: block;
+}
+
+.footer-disclaimer {
+    font-size: 9px;
+    text-align: center;
+    font-family: 'MS Sans Serif', 'Courier New', monospace;
+    color: #000;
+    letter-spacing: 0.3px;
+    margin: 0;
 }
 
 /* ============================================
