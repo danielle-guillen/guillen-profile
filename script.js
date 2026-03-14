@@ -10,9 +10,84 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeWindowControls();
     initializeSocialLinks();
     initializeFormSubmission();
+    initializeRetroMp3Player();
     initializeToolbarButtons();
     addCursorEffects();
 });
+
+function initializeRetroMp3Player() {
+    const lcd = document.getElementById('mp3Lcd');
+    const playBtn = document.getElementById('mp3Play');
+    const pauseBtn = document.getElementById('mp3Pause');
+    const stopBtn = document.getElementById('mp3Stop');
+    const audio = document.getElementById('retroAudio');
+
+    if (!lcd || !playBtn || !pauseBtn || !stopBtn) {
+        return;
+    }
+
+    let elapsed = 0;
+    let timerId = null;
+    let state = 'STOP';
+
+    const formatTime = (totalSeconds) => {
+        const mins = Math.floor(totalSeconds / 60);
+        const secs = totalSeconds % 60;
+        return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+    };
+
+    const refreshLcd = () => {
+        lcd.textContent = 'TRACK 01 | ' + formatTime(elapsed) + ' | ' + state;
+    };
+
+    const startFakePlayback = () => {
+        if (timerId) return;
+        timerId = setInterval(() => {
+            elapsed += 1;
+            refreshLcd();
+        }, 1000);
+    };
+
+    const stopFakePlayback = () => {
+        if (timerId) {
+            clearInterval(timerId);
+            timerId = null;
+        }
+    };
+
+    playBtn.addEventListener('click', () => {
+        state = 'PLAY';
+        startFakePlayback();
+        if (audio) {
+            audio.play().catch(() => {
+                // Keep retro simulation running even without a valid audio source.
+            });
+        }
+        refreshLcd();
+    });
+
+    pauseBtn.addEventListener('click', () => {
+        state = 'PAUSE';
+        stopFakePlayback();
+        if (audio) {
+            audio.pause();
+        }
+        refreshLcd();
+    });
+
+    stopBtn.addEventListener('click', () => {
+        state = 'STOP';
+        stopFakePlayback();
+        elapsed = 0;
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+        refreshLcd();
+    });
+
+    refreshLcd();
+}
 
 /**
  * Enhanced pointing hand animation
@@ -89,6 +164,130 @@ function initializeWindowControls() {
 }
 
 /**
+ * Initialize contact form submission with Formspree
+ */
+function initializeFormSubmission() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) {
+        console.error('Contact form not found');
+        return;
+    }
+    
+    const submitBtn = contactForm.querySelector('.submit-btn');
+    const nameInput = contactForm.querySelector('input[name="name"]');
+    const emailInput = contactForm.querySelector('input[name="email"]');
+    const messageInput = contactForm.querySelector('textarea[name="message"]');
+    
+    if (!submitBtn || !nameInput || !emailInput || !messageInput) {
+        console.error('Form elements not found');
+        return;
+    }
+    
+    // Validation function wrapper
+    const validateForm = () => {
+        const nameValue = nameInput.value.trim();
+        const emailValue = emailInput.value.trim();
+        const messageValue = messageInput.value.trim();
+        
+        // Check if all fields are filled
+        let isValid = Boolean(nameValue && emailValue && messageValue);
+        
+        // Email validation
+        if (isValid && emailValue) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            isValid = emailRegex.test(emailValue);
+        }
+        
+        submitBtn.disabled = !isValid;
+    };
+    
+    // Initial validation
+    validateForm();
+    
+    // Add listeners for real-time validation
+    nameInput.addEventListener('input', validateForm);
+    nameInput.addEventListener('change', validateForm);
+    nameInput.addEventListener('keyup', validateForm);
+    
+    emailInput.addEventListener('input', validateForm);
+    emailInput.addEventListener('change', validateForm);
+    emailInput.addEventListener('keyup', validateForm);
+    
+    messageInput.addEventListener('input', validateForm);
+    messageInput.addEventListener('change', validateForm);
+    messageInput.addEventListener('keyup', validateForm);
+    
+    // Handle form submission
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        handleContactSubmit(e);
+    });
+}
+
+let contactMessageTimer = null;
+
+function showContactStatus(messageLabel, text, tone) {
+    if (!messageLabel) return;
+
+    if (contactMessageTimer) {
+        clearTimeout(contactMessageTimer);
+    }
+
+    messageLabel.textContent = text;
+    messageLabel.className = 'contact-message ' + tone;
+
+    contactMessageTimer = setTimeout(() => {
+        messageLabel.textContent = '';
+        messageLabel.className = 'contact-message';
+    }, 10000);
+}
+
+/**
+ * Handle contact form submission with Formspree (background, no redirect)
+ */
+function handleContactSubmit(event) {
+    const form = event.target;
+    const submitBtn = form.querySelector('.submit-btn');
+    const messageLabel = document.getElementById('contactMessage');
+    const name = form.querySelector('input[name="name"]').value.trim();
+    const email = form.querySelector('input[name="email"]').value.trim();
+    const message = form.querySelector('textarea[name="message"]').value.trim();
+    
+    // Disable button while sending
+    submitBtn.disabled = true;
+    showContactStatus(messageLabel, 'Enviando...', 'sending');
+    
+    // Send data to Formspree using fetch (no redirect)
+    fetch('https://formspree.io/f/xjgaozzp', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            name: name,
+            email: email,
+            message: message
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok || data.status === 'ok') {
+            showContactStatus(messageLabel, '\u2713 Mensaje enviado con \u00e9xito', 'success');
+            form.reset();
+            submitBtn.disabled = true; // Keep disabled until form is filled again
+        } else {
+            showContactStatus(messageLabel, '\u2717 Error al enviar mensaje \u00a1vuelve a intentarlo!', 'error');
+            submitBtn.disabled = false; // Re-enable to try again
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showContactStatus(messageLabel, '\u2717 Error al enviar mensaje \u00a1vuelve a intentarlo!', 'error');
+        submitBtn.disabled = false; // Re-enable to try again
+    });
+}
+
+/**
  * Social link click handlers
  */
 function initializeSocialLinks() {
@@ -104,30 +303,7 @@ function initializeSocialLinks() {
     });
 }
 
-/**
- * Handle contact form submission
- */
-function handleContactSubmit(event) {
-    event.preventDefault();
-    
-    const form = event.target;
-    const inputs = form.querySelectorAll('input, textarea');
-    const data = {};
-    
-    inputs.forEach(input => {
-        data[input.placeholder || input.name] = input.value;
-    });
-    
-    console.log('Contact Form Data:', data);
-    
-    showRetroAlert('¡Tu mensaje ha sido enviado!' + 
-        '\n\nNombre: ' + data['Tu nombre'] + 
-        '\nEmail: ' + data['Tu email'] + 
-        '\nMensaje: ' + data['Tu mensaje']);
-    
-    form.reset();
-    return false;
-}
+
 
 /**
  * Create retro-style alert dialog
@@ -252,7 +428,7 @@ function initializeToolbarButtons() {
  */
 function addCursorEffects() {
     // Change cursor to pointer on interactive elements
-    document.querySelectorAll('a, button, input, textarea, .social-links li a').forEach(element => {
+    document.querySelectorAll('a, button, .social-links li a').forEach(element => {
         element.style.cursor = 'pointer';
     });
     
@@ -295,20 +471,10 @@ style.textContent = `
             opacity: 1;
         }
     }
-    
-    button:focus {
-        outline: 2px dashed #000080;
-        outline-offset: -2px;
-    }
-    
-    input:focus,
-    textarea:focus {
-        outline: 2px solid #000080;
-    }
 `;
 document.head.appendChild(style);
 
-console.log('%c¡Bienvenido a N\\'s Rincón Web!', 
+console.log("%c¡Bienvenido a N's Rincón Web!", 
     'font-size: 16px; font-weight: bold; color: #00ff00; text-shadow: 0 0 10px #00aa00; font-family: Courier New;');
 console.log('%c⭐ Especialista en web retro y nostalgia digital ⭐', 
     'font-size: 12px; color: #00aa00; font-family: Courier New;');

@@ -39,16 +39,28 @@
                 <input type="text" class="address-bar" value="http://localhost/nrinconweb/index.html" readonly>
             </div>
 
+            <div class="classic-toolbar">
+                <button class="classic-btn" type="button">Inicio</button>
+                <button class="classic-btn" type="button">Favoritos</button>
+                <button class="classic-btn" type="button">Descargas</button>
+                <button class="classic-btn" type="button">Guestbook</button>
+                <button class="classic-btn" type="button">Links</button>
+            </div>
+
+            <marquee class="retro-marquee" behavior="scroll" direction="left" scrollamount="5">
+                ⚡ ¡ACTUALIZACIÓN 14/03/2026! ⚡ Bienvenidos a mi nueva página. ¡No olvides firmar mi libro de visitas al fondo a la derecha! 🚧 Página en constante construcción 🚧
+            </marquee>
+
         <!-- PCB Background Content -->
         <div class="pcb-background">
             <!-- Main Layout - Flat panels -->
             <div class="page-layout">
-                <!-- Top Row: Profile, Bio, Welcome -->
+                <!-- Top Row: Profile + Bio -->
                 <div class="top-section">
                     <!-- Profile Avatar -->
                     <div class="profile-panel">
                         <div class="profile-avatar">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cdefs%3E%3Cpattern id='dither' x='0' y='0' width='2' height='2' patternUnits='userSpaceOnUse'%3E%3Crect x='0' y='0' width='1' height='1' fill='%235A5A5A'/%3E%3Crect x='1' y='0' width='1' height='1' fill='%236B6B6B'/%3E%3Crect x='0' y='1' width='1' height='1' fill='%236B6B6B'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%237C7C7C'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23dither)'/%3E%3Ccircle cx='60' cy='40' r='22' fill='%23E8E8E8' opacity='0.8'/%3E%3Crect x='48' y='58' width='12' height='12' fill='%23666' opacity='0.6'/%3E%3Crect x='72' y='58' width='12' height='12' fill='%23666' opacity='0.6'/%3E%3Crect x='40' y='75' width='40' height='35' fill='%23909090' opacity='0.6'/%3E%3C/svg%3E" 
+                            <img src="assets/bill-gates.gif" 
                                  alt="Avatar de N - Persona con gafas" title="Perfil">
                         </div>
                         <h1>Danielle's Rincón Web</h1>
@@ -58,37 +70,45 @@
                     <div class="bio-panel">
                         <div class="panel-header">MI BIO</div>
                         <div class="panel-content">
-                            <p>¡Hola! Soy Danielle, un entusiasta de la tecnología retro y el arte digital. Aquí en mi rincón web comparto mis proyectos, mis habilidades y mis experiencias en el desarrollo web vintage. Mi pasión es crear experiencias nostálgicas que celebren la estética de la web clásica.</p>
+                            <p>
+          <span class="star">★</span> <span class="highlight">Nick:</span> Danielle &nbsp;|&nbsp;
+          <span class="highlight">País:</span> Perú 🇵🇪 &nbsp;|&nbsp;
+          <span class="highlight">Ciudad:</span> Lima &nbsp;|&nbsp;
+          <span class="highlight">Edad:</span> 24 años &nbsp;|&nbsp;
+         <span class="smiley">:)</span>
+        </p>
+        <hr class="divider">
+        <p>
+          ¡Holaaa a todos! <span class="smiley">^_^</span> Me llamo <span class="highlight">Danielle</span> y soy un apasionado/a de la tecnología,
+          el desarrollo web y todo lo retro-digital que pueda encontrar por ahí. Estudio
+          <span class="highlight">Ciencias de la Computación en la UPC</span> (ya egresado/a, yay! <span class="smiley">:D</span>) y trabajo
+          como <span class="highlight">QA Analyst</span> en una empresa tech llamada Mandü, donde me encargo de que
+          el software funcione como debe antes de que llegue a vuestras manos. <span class="smiley">:P</span>
+        </p>
+        <p>
+          Manejo <span class="highlight">Python, JavaScript, TypeScript y C++</span>, aunque si me preguntan qué lenguaje
+          elijo en mi tiempo libre... definitivamente Python gana. <span class="smiley">xD</span>
+          También me muevo con Cypress, Postman y automatización de pruebas. Básicamente, soy el/la que
+          intenta romper las cosas antes de que las rompan los usuarios. <span class="smiley">;)</span>
+        </p>
+        <p>
+          Fuera de la pantalla (bueno, casi nunca fuera de la pantalla, seamos honestos <span class="smiley">lol</span>):
+          me fascina la <span class="highlight">estética web de los 90s y los 2000s</span>, los GIFs animados,
+          el HTML hecho a mano y la nostalgia digital en general. Si conocéis sitios
+          como Geocities o el antiguo Myspace, somos almas gemelas. <span class="smiley">:3</span>
+        </p>
+        <p>
+          Podéis encontrarme en mis redes o directamente <span class="highlight">firmando mi libro de visitas</span>
+          que está ahí abajo a la derecha. ¡Prometo responder todos los mensajes! <span class="smiley">(*^▽^*)</span>
+        </p>
                         </div>
                     </div>
 
-                    <!-- Welcome Panel -->
-                    <div class="welcome-panel">
-                        <div class="panel-header">¡BIENVENIDO A MI RINCÓN WEB!</div>
-                        <div class="panel-content">
-                            <p>Bienvenido a mi sitio personal, un espacio dedicado a la nostalgia digital y la estética retro. Aquí encontrarás un viaje a través de la web de los años 90 y principios de los 2000, con un toque de modernidad. Explora mis proyectos, conecta conmigo por mis redes sociales, y disfruta de esta experiencia vintage.</p>
-                            <!-- Glowing W -->
-                            <div class="glowing-w">
-                                <svg viewBox="0 0 100 100" width="70" height="70">
-                                    <defs>
-                                        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-                                            <stop offset="0%" style="stop-color:#00FF00;stop-opacity:1" />
-                                            <stop offset="70%" style="stop-color:#00AA00;stop-opacity:0.8" />
-                                            <stop offset="100%" style="stop-color:#005500;stop-opacity:0" />
-                                        </radialGradient>
-                                    </defs>
-                                    <circle cx="50" cy="50" r="45" fill="url(#glow)" opacity="0.3"/>
-                                    <text x="50" y="70" font-size="60" font-weight="bold" fill="#00FF00" text-anchor="middle" 
-                                          font-family="'Courier New', monospace">W</text>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Middle Row: Left (Social + Projects), Center (Music), Right (Animations + Skills) -->
                 <div class="middle-section">
-                    <!-- Left Column: Social and Projects -->
+                    <!-- Left Column: Social, Skull and Skills -->
                     <div class="left-column">
                         <!-- MIS REDES -->
                         <div class="social-panel">
@@ -105,70 +125,6 @@
                             </div>
                         </div>
 
-                        <!-- MIS PROYECTOS -->
-                        <div class="projects-panel">
-                            <div class="panel-header">MIS PROYECTOS</div>
-                            <div class="projects-content">
-                                <div class="project-item">
-                                    <div class="project-icon">📝</div>
-                                    <div class="project-info">
-                                        <h4>Blog</h4>
-                                        <p>Mis pensamientos y tutoriales sobre web retro</p>
-                                    </div>
-                                </div>
-                                <div class="project-item">
-                                    <div class="project-icon">🎨</div>
-                                    <div class="project-info">
-                                        <h4>Portafolio</h4>
-                                        <p>Galería de pixel art y diseño clásico</p>
-                                    </div>
-                                </div>
-                                <div class="project-item">
-                                    <div class="project-icon">🎮</div>
-                                    <div class="project-info">
-                                        <h4>Juegos</h4>
-                                        <p>Pequeños experimentos interactivos</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Center Column: Music Player -->
-                    <div class="center-column">
-                        <div class="media-panel">
-                            <div class="panel-header">REPRODUCTOR DE MÚSICA</div>
-                            <div class="panel-content">
-                                <div class="player-display">
-                                    <div class="freq-bars">
-                                        <div class="bar"></div>
-                                        <div class="bar"></div>
-                                        <div class="bar"></div>
-                                        <div class="bar"></div>
-                                        <div class="bar"></div>
-                                        <div class="bar"></div>
-                                    </div>
-                                </div>
-                                <div class="player-controls">
-                                    <button class="player-btn" title="Anterior">⏮</button>
-                                    <button class="player-btn" title="Reproducir">⏯</button>
-                                    <button class="player-btn" title="Siguiente">⏭</button>
-                                    <div class="volume-slider"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column: Animations and Skills -->
-                    <div class="right-column">
-                        <!-- Dancing Cat -->
-                        <div class="animation-panel">
-                            <div class="panel-header">DANZADOR</div>
-                            <div class="gif-display dancing">
-                                <img src="assets/dancing-cat.gif" alt="Gato danzante animado" title="Dancing Cat">
-                            </div>
-                        </div>
-
                         <!-- Skull -->
                         <div class="animation-panel">
                             <div class="panel-header">CALAVERA</div>
@@ -180,48 +136,101 @@
                         <!-- Skills -->
                         <div class="skills-panel">
                             <div class="panel-header">MIS HABILIDADES</div>
+                            <div class="panel-content construction-state">
+                                <div class="construction-box">
+                                    <img src="assets/worker.gif" alt="En construcción" title="Página en construcción">
+                                    <p>EN CONSTRUCCIÓN</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Center Column: Welcome, MP3 and Counter -->
+                    <div class="center-column">
+                        <div class="welcome-panel">
+                            <div class="panel-header">¡BIENVENIDO A MI RINCÓN WEB!</div>
                             <div class="panel-content">
-                                <div class="skill-item">
-                                    <span class="icon">🌐</span>
-                                    <span class="label">HTML/CSS</span>
+                                <p>Bienvenido a mi sitio personal, un espacio dedicado a la nostalgia digital y la estética retro. Aquí encontrarás un viaje a través de la web de los años 90 y principios de los 2000, con un toque de modernidad. Explora mis proyectos, conecta conmigo por mis redes sociales, y disfruta de esta experiencia vintage.</p>
+                                <div class="glowing-w">
+                                    <svg viewBox="0 0 100 100" width="70" height="70">
+                                        <defs>
+                                            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                                                <stop offset="0%" style="stop-color:#00FF00;stop-opacity:1" />
+                                                <stop offset="70%" style="stop-color:#00AA00;stop-opacity:0.8" />
+                                                <stop offset="100%" style="stop-color:#005500;stop-opacity:0" />
+                                            </radialGradient>
+                                        </defs>
+                                        <circle cx="50" cy="50" r="45" fill="url(#glow)" opacity="0.3"/>
+                                        <text x="50" y="70" font-size="60" font-weight="bold" fill="#00FF00" text-anchor="middle" font-family="'Courier New', monospace">W</text>
+                                    </svg>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="icon">🎨</span>
-                                    <span class="label">Pixel Art</span>
+                            </div>
+                        </div>
+
+                        <div class="mp3-panel">
+                            <div class="panel-header">REPRODUCTOR MP3</div>
+                            <div class="panel-content mp3-content">
+                                <div class="mp3-lcd" id="mp3Lcd">TRACK 01 | 00:00 | STOP</div>
+                                <div class="mp3-controls">
+                                    <button class="mp3-btn" id="mp3Play" type="button">PLAY</button>
+                                    <button class="mp3-btn" id="mp3Pause" type="button">PAUSE</button>
+                                    <button class="mp3-btn" id="mp3Stop" type="button">STOP</button>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="icon">🎵</span>
-                                    <span class="label">Música</span>
+                                <audio id="retroAudio" preload="none"></audio>
+                            </div>
+                        </div>
+
+                        <div class="counter-panel">
+                            <div class="panel-header">CONTADOR DE VISITAS</div>
+                            <div class="panel-content counter-content">
+                                <p>EN MANTENIMIENTO</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Danzador, Projects and Contact -->
+                    <div class="right-column">
+                        <!-- Dancing Cat -->
+                        <div class="animation-panel">
+                            <div class="panel-header">DANZADOR</div>
+                            <div class="gif-display dancing">
+                                <img src="assets/dancing-cat.gif" alt="Gato danzante animado" title="Dancing Cat">
+                            </div>
+                        </div>
+
+                        <!-- MIS PROYECTOS -->
+                        <div class="projects-panel">
+                            <div class="panel-header">MIS PROYECTOS</div>
+                            <div class="projects-content construction-state">
+                                <div class="construction-box">
+                                    <img src="assets/worker.gif" alt="En construcción" title="Página en construcción">
+                                    <p>EN CONSTRUCCIÓN</p>
                                 </div>
-                                <div class="skill-item">
-                                    <span class="icon">💾</span>
-                                    <span class="label">Diseño Retro</span>
-                                </div>
+                            </div>
+                        </div>
+
+                        <!-- LIBRO DE VISITAS -->
+                        <div class="contact-panel">
+                            <div class="panel-header">LIBRO DE VISITAS</div>
+                            <div class="panel-content">
+                                <p class="contact-subtitle">¡Firma mi muro!</p>
+                                <form class="contact-form" id="contactForm">
+                                    <input type="text" name="name" placeholder="Tu nombre" required>
+                                    <input type="email" name="email" placeholder="Tu email" required>
+                                    <textarea name="message" placeholder="Tu mensaje" required rows="3"></textarea>
+                                    <p class="contact-message" id="contactMessage"></p>
+                                    <button type="submit" class="submit-btn" disabled>ENVIAR</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bottom Section: Contact -->
-                <div class="bottom-section">
-                    <div class="contact-panel">
-                        <div class="panel-header">CONTÁCTAME</div>
-                        <div class="panel-content">
-                            <p class="contact-subtitle">ENVÍAME UN MENSAJE</p>
-                            <form class="contact-form" onsubmit="return handleContactSubmit(event)">
-                                <input type="text" placeholder="Tu nombre" required>
-                                <input type="email" placeholder="Tu email" required>
-                                <textarea placeholder="Tu mensaje" required rows="4"></textarea>
-                                <button type="submit" class="submit-btn">ENVIAR</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+
 
                 <!-- Footer -->
                 <div class="footer-section">
-                    <p>&copy; 2000 N's Rincón Web. Todos los derechos reservados.</p>
-                    <p>🌐 Best viewed in Internet Explorer 5.0 | 📡 Netscape Navigator compatible</p>
+                    <p>EN MANTENIMIENTO</p>
                 </div>
             </div>
         </div>
