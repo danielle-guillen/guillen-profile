@@ -1,116 +1,87 @@
 # 🎮 Danielle's Rincón Web
 
-## ¡Bienvenido a mi Rincón Web! 
+Sitio personal con estética **Web 1.0 + Windows 98 / Internet Explorer 5**, diseñado para recrear la experiencia visual de finales de los 90 e inicios de los 2000.
 
-Bienvenido a una experiencia nostálgica y retro-futurista. Este es mi espacio personal en la web, diseñado como si fuera un sitio de los años 90 y principios de los 2000, con toda la estética vintage que caracterizaba a Internet Explorer 5.0 y los navegadores clásicos.
+## 🌐 Qué incluye
 
-## 🌐 Sobre este Sitio
+- Ventana principal estilo Win98 (`.win98-window`) con title bar, menú y toolbars clásicas.
+- Layout modular con Grid/Flex (sin perspectiva 3D moderna).
+- Panel “Mis Redes” tipo explorador/directorio con micro íconos de 16x16.
+- Footer tipo “trophy case” con badges 88x31.
+- Reproductor MP3 **visual-only** (sin audio real), con LCD retro y playlist XML.
+- Efecto CRT con scanlines y tipografía retro.
 
-Este proyecto es una **reconstrucción auténtica de un sitio web clásico** con:
-
-- **Interfaz Windows 98**: Marco completo de ventana con botones de control, barra de menú y barra de herramientas funcionales
-- **Estética Retro**: Verde PCB circuit board de fondo, tipografía pixelada, y bordes beveled al estilo Windows 95/98
-- **Efectos CRT**: Scanlines sutiles para simular el efecto de un monitor CRT clásico
-- **Contenido en Español**: Toda la interfaz y textos en español auténtico
-- **GIFs Animados**: Danzador (gato danzante) y calavera para la diversión nostálgica
-- **Reproductor de Música**: Visualizador de frecuencia funcional con controles retro
-
-## 📂 Estructura del Sitio
+## 📂 Estructura del proyecto
 
 ```
 /
-├── index.html          # Página principal
-├── style.css           # Estilos CSS retro con Grid layout
-├── script.js           # Interactividad y animaciones
+├── index.html
+├── style.css
+├── script.js
+├── playlist.xml
 ├── assets/
-│   ├── dancing-cat.gif # Gato danzante animado
-│   └── skull.gif       # Calavera animada
-└── README.md          # Este archivo
+└── README.md
 ```
 
-## 🎯 Secciones Principales
+## 🎵 Reproductor MP3 (simulación visual)
 
-### 👤 MI BIO
-Mi presentación personal en el sitio, destacando mi pasión por la tecnología retro y el arte digital.
+El reproductor no reproduce archivos de audio. Simula reproducción usando estado interno y un temporizador.
 
-### ¡BIENVENIDO A MI RINCÓN WEB!
-Sección de bienvenida con la descripción del sitio y un glowing neon "W" verde.
+### Controles
 
-### 🔗 MIS REDES
-Enlaces a mis redes sociales:
-- AIM: NsCorner
-- MySpace: /NsCorner
-- X: @NsCorner
-- Instagram: @im_daaaniel
-- Facebook: N
+- `PLAY`: inicia contador falso (`setInterval` cada 1s).
+- `PAUSE`: pausa contador.
+- `STOP`: detiene y reinicia a `00:00`.
+- `|◀` (`Prev`) y `▶|` (`Next`): cambian pista manualmente y reinician tiempo.
 
-### 🎵 REPRODUCTOR DE MÚSICA
-Un reproductor de música estilo retro con visualizador de barras de frecuencia animadas.
+### LCD
 
-### 🎬 DANZADOR & CALAVERA
-Animaciones GIF autênticas para agregar diversión y movimiento al sitio.
+Formato mostrado:
 
-### 🛠️ MIS HABILIDADES
-Lista de competencias técnicas:
-- HTML/CSS
-- Pixel Art
-- Música
-- Diseño Retro
+`[ID]. [TITLE] | [MM:SS] | [STATE]`
 
-### 📝 MIS PROYECTOS
-Proyectos destacados:
-- **Blog**: Mis pensamientos y tutoriales sobre web retro
-- **Portafolio**: Galería de pixel art y diseño clásico
-- **Juegos**: Pequeños experimentos interactivos
+Ejemplo: `01. Final Fantasy VII - Battle Theme | 00:14 | PLAY`
 
-### 📧 CONTÁCTAME
-Formulario interactivo para enviar mensajes directos.
+### `playlist.xml`
 
-## 🛠️ Tecnologías Utilizadas
+Cada pista usa este formato:
 
-- **HTML5**: Semántico y accesible
-- **CSS3**: Grid layout modular, sin perspectiva 3D, diseño flat
-- **JavaScript Vanilla**: Sin dependencias externas
-- **Retro Aesthetic**: Windows 95/98 UI styling
+```xml
+<track>
+	<id>01</id>
+	<title>Nombre de la canción</title>
+	<duration>185</duration>
+</track>
+```
 
-## 🎨 Características de Diseño
+- `duration` está en segundos.
+- Cuando `elapsedSeconds >= duration`, el reproductor hace auto-skip a la siguiente pista.
+- Al llegar al final, vuelve al índice `0` (loop).
 
-### **Vista Flat 2D**
-Toda la interfaz es completamente flat (sin perspectiva), para una experiencia auténtica de Windows 98.
+## 🔗 Mis Redes
 
-### **Paneles Modulares**
-Layout basado en CSS Grid con secciones independientes:
-- Sección Superior (Perfil, Bio, Bienvenida)
-- Sección Media (Redes, Reproductor, Animaciones)
-- Sección Inferior (Contacto)
+Los enlaces del panel “MIS REDES”:
 
-### **Interactividad Retro**
-- Botones de ventana funcionales (minimizar, maximizar, cerrar)
-- Navegación en toolbar
-- Formulario de contacto
-- Alertas estilo IE 5.0
+- redirigen a URLs reales,
+- se abren en pestaña nueva (`target="_blank"`),
+- usan `rel="noopener noreferrer"`.
 
-### **Estética Auténtica**
-- Bordes beveled (3D en 2D)
-- Colores clásicos de Windows 95/98
-- Tipografía MS Sans Serif
-- Efectos de scanlines CRT
+## 🎨 Lineamientos visuales implementados
 
-## 🚀 Cómo Usar
+- Botones y paneles con biseles Win98 (relieve/inset).
+- Toolbars con `grips`, separadores verticales y botones icon+texto.
+- Íconos 16x16 con `image-rendering: pixelated`.
+- Badges 88x31 en footer con borde retro.
+- Tipografía y densidad visual orientadas a look técnico clásico.
 
-1. Abre `index.html` en tu navegador moderno
-2. Explora todas las secciones
-3. Interactúa con los elementos retro
-4. Envía un mensaje en la sección CONTÁCTAME
+## 🚀 Ejecutar localmente
 
-## 📝 Notas
+1. Abrir el proyecto en VS Code.
+2. Levantar un servidor local (recomendado, para `fetch('playlist.xml')`).
+3. Abrir `index.html` en el navegador.
 
-Este sitio es responsivo y funciona en navegadores modernos, manteniendo la autenticidad del diseño de los 90.
-
-**Best viewed in Internet Explorer 5.0** 😄
+> Nota: si `playlist.xml` no carga por contexto local, el reproductor usa una playlist de respaldo para mantener la simulación visual.
 
 ---
 
-© 2000 (o 2026, según prefieras) Danielle's Rincón Web. Todos los derechos reservados.
-
-Hecho con ❤️ y mucho amor por la nostalgia digital.
+© 2026 Danielle's Rincón Web.
